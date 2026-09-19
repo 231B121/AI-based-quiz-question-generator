@@ -149,7 +149,11 @@
       html2canvas: { scale: 2 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
-    html2pdf().set(opt).from(el).save();
+    if (typeof window.html2pdf !== 'undefined') {
+      window.html2pdf().set(opt).from(el).save();
+    } else {
+      showError("PDF export library not loaded.");
+    }
   }
 
   // Event listeners
